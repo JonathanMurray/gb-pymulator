@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+*.iml
+__pycache__
+*.pyc
+venv
+build
+*-darwin.so
+
+TODO.txt
+profiling
+savefiles
