@@ -5,6 +5,7 @@ _A gameboy emulator written in Python_
 ## Installation
 
 This project uses Python3, Pygame for graphics, and Cython for performance optimizations.
+(Use PyPy for more performance without C & Cython)
 
 Install dependencies with `pip`:
 
