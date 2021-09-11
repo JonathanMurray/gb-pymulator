@@ -366,16 +366,16 @@ class Display:
                 elif event.key == pygame.K_RIGHT:
                     self._joypad.on_press_right()
                     return 1
-                elif event.key == pygame.K_s:
+                elif event.key == pygame.K_RETURN:
                     self._joypad.on_press_start()
                     return 1
-                elif event.key == pygame.K_t:
+                elif event.key == pygame.K_BACKSPACE:
                     self._joypad.on_press_select()
                     return 1
-                elif event.key == pygame.K_a:
+                elif event.key == pygame.K_z:
                     self._joypad.on_press_a()
                     return 1
-                elif event.key == pygame.K_b:
+                elif event.key == pygame.K_x:
                     self._joypad.on_press_b()
                     return 1
                 elif event.key == pygame.K_c:
@@ -394,16 +394,16 @@ class Display:
                 elif event.key == pygame.K_RIGHT:
                     self._joypad.on_release_right()
                     return 1
-                elif event.key == pygame.K_s:
+                elif event.key == pygame.K_RETURN:
                     self._joypad.on_release_start()
                     return 1
-                elif event.key == pygame.K_t:
+                elif event.key == pygame.K_BACKSPACE:
                     self._joypad.on_release_select()
                     return 1
-                elif event.key == pygame.K_a:
+                elif event.key == pygame.K_z:
                     self._joypad.on_release_a()
                     return 1
-                elif event.key == pygame.K_b:
+                elif event.key == pygame.K_x:
                     self._joypad.on_release_b()
                     return 1
         return 0
