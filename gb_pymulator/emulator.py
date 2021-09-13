@@ -1,11 +1,13 @@
 # cython: profile=True
 import os.path
+import json
 
 from gb_pymulator import instruction_decoding
 from gb_pymulator import logger
 from gb_pymulator.cartridge import Cartridge
 from gb_pymulator.cartridge_header import CartridgeHeader, CartridgeType, RAM_Size
 from gb_pymulator.display import Display
+from gb_pymulator.key_bindings import load_keybindings
 from gb_pymulator.joypad import JoyPad
 from gb_pymulator.motherboard import Motherboard, Memory
 from gb_pymulator.timer import Timer
@@ -51,7 +53,12 @@ def run_game_from_file(filename: str):
 
     joypad = JoyPad()
     timer = Timer()
-    display = Display(joypad)
+
+    with open("key_bindings.json", "r") as file:
+        key_bindings_config = json.loads(file.read())
+    key_bindings = load_keybindings(key_bindings_config)
+
+    display = Display(joypad, key_bindings)
 
     ram_size_enum = RAM_Size(cartridge_data[0x149])
     if ram_size_enum == RAM_Size.NONE:

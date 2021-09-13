@@ -25,5 +25,9 @@ Start a game:
 ./run.py games/super_mario.gb
 ```
 
+Tips & tricks:
+- Configure key-bindings in `key_bindings.json`
+- Toggle between color schemes (black-and-white or "retro green") by pressing `C`
+
 ![super_mario](screenshots/screenshot_2021_03_14_super_mario.png)
 
