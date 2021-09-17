@@ -5,6 +5,7 @@ from pygame.surface import Surface
 
 from gb_pymulator.joypad import JoyPad
 from gb_pymulator import logger
+from gb_pymulator.key_bindings import UserInputKeyBindings
 
 MARGIN = 10
 
@@ -45,7 +46,7 @@ def _tile_offset_8000_method(tile_byte_size, tile_number):
 
 
 class Display:
-    def __init__(self, joypad: JoyPad):
+    def __init__(self, joypad: JoyPad, user_input_key_bindings: UserInputKeyBindings):
         # screen_resolution = (160 + MARGIN + 256 + 20, 256)
         screen_resolution = (160, 144)
 
@@ -86,6 +87,15 @@ class Display:
         # Dynamic color maps are features of the emulator and not properties of the gameboy console itself.
         self._color_map_index = 0
         self._colors = COLOR_MAPS[self._color_map_index]
+
+        self._key_down = user_input_key_bindings.down
+        self._key_up = user_input_key_bindings.up
+        self._key_left = user_input_key_bindings.left
+        self._key_right = user_input_key_bindings.right
+        self._key_start = user_input_key_bindings.start
+        self._key_select = user_input_key_bindings.select
+        self._key_a = user_input_key_bindings.a
+        self._key_b = user_input_key_bindings.b
 
     @staticmethod
     def set_title(title: str):
@@ -354,56 +364,56 @@ class Display:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return -1
-                elif event.key == pygame.K_DOWN:
+                elif event.key == self._key_down:
                     self._joypad.on_press_down()
                     return 1
-                elif event.key == pygame.K_UP:
+                elif event.key == self._key_up:
                     self._joypad.on_press_up()
                     return 1
-                elif event.key == pygame.K_LEFT:
+                elif event.key == self._key_left:
                     self._joypad.on_press_left()
                     return 1
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == self._key_right:
                     self._joypad.on_press_right()
                     return 1
-                elif event.key == pygame.K_RETURN:
+                elif event.key == self._key_start:
                     self._joypad.on_press_start()
                     return 1
-                elif event.key == pygame.K_BACKSPACE:
+                elif event.key == self._key_select:
                     self._joypad.on_press_select()
                     return 1
-                elif event.key == pygame.K_z:
+                elif event.key == self._key_a:
                     self._joypad.on_press_a()
                     return 1
-                elif event.key == pygame.K_x:
+                elif event.key == self._key_b:
                     self._joypad.on_press_b()
                     return 1
                 elif event.key == pygame.K_c:
                     self._color_map_index = (self._color_map_index + 1) % len(COLOR_MAPS)
                     self._colors = COLOR_MAPS[self._color_map_index]
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_DOWN:
+                if event.key == self._key_down:
                     self._joypad.on_release_down()
                     return 1
-                elif event.key == pygame.K_UP:
+                elif event.key == self._key_up:
                     self._joypad.on_release_up()
                     return 1
-                elif event.key == pygame.K_LEFT:
+                elif event.key == self._key_left:
                     self._joypad.on_release_left()
                     return 1
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == self._key_right:
                     self._joypad.on_release_right()
                     return 1
-                elif event.key == pygame.K_RETURN:
+                elif event.key == self._key_start:
                     self._joypad.on_release_start()
                     return 1
-                elif event.key == pygame.K_BACKSPACE:
+                elif event.key == self._key_select:
                     self._joypad.on_release_select()
                     return 1
-                elif event.key == pygame.K_z:
+                elif event.key == self._key_a:
                     self._joypad.on_release_a()
                     return 1
-                elif event.key == pygame.K_x:
+                elif event.key == self._key_b:
                     self._joypad.on_release_b()
                     return 1
         return 0

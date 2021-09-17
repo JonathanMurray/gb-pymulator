@@ -31,6 +31,15 @@ cdef class Display:
     cdef list _colors
     cdef int _color_map_index
 
+    cdef int _key_down
+    cdef int _key_up
+    cdef int _key_left
+    cdef int _key_right
+    cdef int _key_start
+    cdef int _key_select
+    cdef int _key_a
+    cdef int _key_b
+
     cpdef int advance_one_scanline(self)
     cdef int handle_user_input(self)
 
